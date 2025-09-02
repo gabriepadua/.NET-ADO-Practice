@@ -1,6 +1,7 @@
 # Configurações locais
 appsettings.json
 appsettings.*.json
+app.settings.json
 
 # Visual Studio
 bin/

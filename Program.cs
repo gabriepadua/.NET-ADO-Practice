@@ -15,6 +15,13 @@ namespace Program
 
             IConfiguration configuration = builder.Build();
             connectionString = configuration.GetConnectionString("DefaultConnection")!;
+
+            // ReadUsers();
+            // ReadUser();
+            // CreateUser();
+            // UpdateUser();
+            DeleteUser();
+
         }
 
         public static void ReadUsers()
@@ -25,8 +32,63 @@ namespace Program
 
                 foreach (var user in users)
                 {
-                    Console.WriteLine("user:", user.Name);
+                    Console.WriteLine($"user: {user.Name}");
                 }
+            }
+        }
+        public static void ReadUser()
+        {
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var user = connection.Get<User>(1);
+                Console.WriteLine($"user: {user.Name}");
+            }
+        }
+        public static void CreateUser()
+        {
+            var user = new User()
+            {
+                Bio = "Devlo",
+                Email = "hello@balta.io",
+                Image = "https://",
+                Name = "Teste Balta",
+                PasswordHash = "HASH",
+                Slug = "equipe-teste"
+
+            };
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Insert<User>(user);
+                Console.WriteLine("Cadastrado com sucesso");
+            }
+        }
+        public static void UpdateUser()
+        {
+            var user = new User()
+            {
+                Id = 4,
+                Bio = "BALTA IO EDITADO",
+                Email = "hello@baltaEDITADO.io",
+                Image = "https://",
+                Name = "Teste EDITADOBalta",
+                PasswordHash = "HASH",
+                Slug = "equipe-teste2"
+
+            };
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Update<User>(user);
+                Console.WriteLine("Atualizado com sucesso");
+            }
+        }
+        public static void DeleteUser()
+        {
+
+            using (var connection = new SqlConnection(connectionString))
+            {
+                var user = connection.Get<User>(4);
+                connection.Delete<User>(user);
+                Console.WriteLine("Exclusão com sucesso");
             }
         }
     }
