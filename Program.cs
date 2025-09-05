@@ -19,9 +19,11 @@ namespace Program
             var connection = new SqlConnection(connectionString);
             connection.Open();
 
-            ReadUsers(connection);
-            ReadRoles(connection);
-            ReadTags(connection);
+            // ReadUsers(connection);
+            ReadUsersWithRoles(connection);
+            // CreateUsers(connection);
+            // ReadRoles(connection);
+            // ReadTags(connection);
             // CreateUser();
             // UpdateUser();
             // DeleteUser();
@@ -37,7 +39,26 @@ namespace Program
             foreach (var item in items)
             {
                 Console.WriteLine(item.Name);
+                foreach (var role in item.Roles)
+                {
+                    Console.WriteLine($" - {role.Name}");
+                }
             }
+        }
+        public static void CreateUsers(SqlConnection connection)
+        {
+
+            var user = new User()
+            {
+                Email = "gabriel@padua2.com",
+                Bio = "bio2",
+                Image = "Image2",
+                Name = "Nome GABRIEL2",
+                PasswordHash = "TesteHash2",
+                Slug = "slug2"
+            };
+            var repository = new Repository<User>(connection);
+            repository.Create(user);
         }
         public static void ReadRoles(SqlConnection connection)
         {
@@ -57,6 +78,21 @@ namespace Program
             foreach (var item in items)
             {
                 Console.WriteLine(item.Name);
+            }
+        }
+
+        private static void ReadUsersWithRoles(SqlConnection connection)
+        {
+            var repository = new UserRepository(connection);
+            var items = repository.ReadWithRole();
+            foreach (var item in items)
+            {
+                Console.WriteLine(item.Name);
+                foreach (var role in item.Roles)
+                {
+                    if (role != null)
+                        Console.WriteLine($" - {role.Name}");
+                }
             }
         }
     }

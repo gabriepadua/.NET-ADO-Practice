@@ -1,4 +1,5 @@
 using Dapper.Contrib.Extensions;
+using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 
 public class Repository<TModel> where TModel : class
