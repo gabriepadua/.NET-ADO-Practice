@@ -5,9 +5,9 @@ public static class UpdateTagScreen
         Console.Clear();
         Console.WriteLine("Atualizando tag");
         Console.WriteLine("Insira o Id: ");
-        var id = Console.ReadLine();
+        var id = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("Insira o nome: ");
-        var name = Console.ReadLine();
+        var name = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("Insira o slug: ");
         var slug = Console.ReadLine();
         Console.WriteLine();

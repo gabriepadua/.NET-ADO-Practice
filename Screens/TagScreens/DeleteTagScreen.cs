@@ -5,7 +5,7 @@ public static class DeleteTagScreen
         Console.Clear();
         Console.WriteLine("Excluir tag");
         Console.WriteLine("Insira o Id: ");
-        var id = Console.ReadLine();
+        var id = Console.ReadLine() ?? string.Empty;
         Console.WriteLine();
         Delete(int.Parse(id));
         MenuTagScreen.Load();

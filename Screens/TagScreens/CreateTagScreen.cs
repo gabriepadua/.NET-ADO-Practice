@@ -5,7 +5,7 @@ public static class CreateTagScreen
         Console.Clear();
         Console.WriteLine("Nova tag");
         Console.WriteLine("Insira o nome: ");
-        var name = Console.ReadLine();
+        var name = Console.ReadLine() ?? string.Empty;
         Console.WriteLine("Insira o slug: ");
         var slug = Console.ReadLine();
         Console.WriteLine();
